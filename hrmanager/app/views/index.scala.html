@@ -1,0 +1,9 @@
+@import entity.User
+@import java.util.List
+
+@(emailLogin: String, roleIdLogin:String) 
+@main("Hrmanager") {
+<div id="wrapper">
+	@admin_header("Index",emailLogin,roleIdLogin)
+</div>
+}
