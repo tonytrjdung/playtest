@@ -26,12 +26,12 @@
 						@if(flash.get("userExist") != None) {
 							@flash.get("userExist").get
 						}
+
 						</span>
 					</ol>
 				</div>
 			</div>
 			<!-- /.row -->
-
 			<div class="row">
 
 				<form method="POST" action="/register">
@@ -82,7 +82,6 @@
 						<div class="form-group">
 							<label>Cấp trên</label>
 							<select class="form-control" name="emailUpper" id="emailUpper">
-								<option value="" selected></option>
 								@if(superList != null) {
 									@for(emailUser <- superList) {
 										@if(userForm("emailUpper").value != None){
@@ -102,7 +101,7 @@
 					</div>
 					<div class="col-lg-12">
 						<button type="submit" class="btn btn-primary">Đăng ký</button>
-							<a href="@routes.LoginController.home()">
+							<a href="/">
 			                <button type="button" class="btn btn-default">Hủy bỏ</button>
 						</a>
 					</div>

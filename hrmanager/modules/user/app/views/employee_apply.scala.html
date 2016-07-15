@@ -1,0 +1,123 @@
+@import entity._
+@import forms._
+@import play.i18n._
+@import java.util.List
+@import constants._
+@import utils._
+
+@(employeeApplyForm : Form[CreateEmployeeApplyForm],deparments : List[Deparment],users: List[User],reasons: List[Reason],emailLogin: String, roleIdLogin: String) 
+@main("Employee Page") { 
+@admin_header("List User",emailLogin,roleIdLogin)
+<div id="wrapper">
+	@admin_header("Employee Page",emailLogin, roleIdLogin)
+	<div id="page-wrapper">
+		<div class="container-fluid">
+			<!-- Page Heading -->
+			<div class="row">
+				<div class="col-lg-12">
+					<h1 class="page-header">Đơn Xin Nghỉ Của Tôi</h1>
+					<ol class="breadcrumb">
+						<li><i class="fa fa-dashboard"></i> <a href="@StringUtils.redirectPageRole(roleIdLogin)">HR Manager</a></li>
+						<li class="active"><i class="fa fa-table"></i> @StringUtils.printTitleApplication(employeeApplyForm("id").value.get.toInt)</li>
+					</ol>
+				</div>
+			</div>
+			<!-- /.row -->
+
+			<div class="row">
+				<form method="POST" action="/employee/apply">
+					<div class="col-lg-6">
+					<span class="help-block">
+						@Messages.get(StringUtils.getMessageDate(employeeApplyForm))
+					</span>
+						<div class="form-group">
+							<label>Người nộp đơn</label>
+							<input class="form-control" value="@employeeApplyForm("fullName").value" readonly="readonly" name="fullName" id="fullName">
+						</div>
+						
+						<div class="form-group">
+							<label>Người duyệt</label>
+							<select class="form-control" name="emailManager" id="emailManager">
+								@for(value <- users) {
+									@if(employeeApplyForm("emailManager").value == value.email){
+										<option value="@value.email" selected>@value.fullName</option>
+									} else {
+										<option value="@value.email">@value.fullName</option>
+									}
+								}
+							</select>
+						</div>
+						
+						<div class="form-group">
+							<div class="form-group">
+								<label>Từ ngày</label>
+								<div class='input-group date'>
+									<input type="Text" name="fromDate"  value="@employeeApplyForm("fromDate").value" id="fromDate"
+				 								maxlength="25" size="25"  readonly/>  
+				 								 <img src="/assets/img/cal.gif"
+												onclick="javascript:NewCssCal('fromDate', 'yyyyMMdd')" style="cursor: pointer" />
+									<span class="help-block">@if(employeeApplyForm("fromDate").hasErrors) {@Messages.get(employeeApplyForm("fromDate").error.get.message)}</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-lg-6">
+						<div class="form-group">
+							<label>Đơn vị</label>
+							@for(value <- deparments) {
+								@if(employeeApplyForm("deparmentid").value.get.toInt == value.deparmentId){
+								 	<input class="form-control" value="@value.deparmentName" name="deparmentName" id="deparmentName" readonly="readonly">
+								 	<input class="form-control" value="@employeeApplyForm("deparmentid").value" name="deparmentid" id="deparmentid" type="hidden">
+								}
+							}
+						</div>
+						
+						<div class="form-group">
+							<label>Lý do nghỉ</label>
+							<select class="form-control" name="reasonId" id="reasonId">
+								@for(value <- reasons) {
+									@if(employeeApplyForm("reasonId").value.get.toInt == value.reasonId){
+										<option value="@value.reasonId" selected>@value.reasonName</option>
+									} else {
+										<option value="@value.reasonId">@value.reasonName</option>
+									}
+								}
+								
+							</select>
+						</div>
+						
+						<div class="form-group">
+							<div class="form-group">
+								<label>Đến ngày</label>
+								<div class='input-group date'>
+									<input type="Text" name="toDate"  value="@employeeApplyForm("toDate").value" id="toDate"
+				 								maxlength="25" size="25"  readonly/>  
+				 								 <img src="/assets/img/cal.gif"
+												onclick="javascript:NewCssCal('toDate', 'yyyyMMdd')" style="cursor: pointer" />
+									<span class="help-block">@if(employeeApplyForm("toDate").hasErrors) {@Messages.get(employeeApplyForm("toDate").error.get.message)}</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<input type="hidden" name="emailEmployee" id="emailEmployee" value="@employeeApplyForm("emailEmployee").value">
+					<input type="hidden" name="statusId" id="statusId" value="@employeeApplyForm("statusId").value">
+					<input type="hidden" name="submitDate" id="submitDate" value="@employeeApplyForm("submitDate").value">
+					<input type="hidden" name="id" id="id" value="@employeeApplyForm("id").value">
+					<input type="hidden" name="currentPage" id="currentPage" value="@employeeApplyForm("currentPage").value">
+					
+					<div class="col-lg-12">
+						<button type="submit" class="btn btn-primary">
+						@StringUtils.printTitleApplication(employeeApplyForm("id").value.get.toInt)
+						</button>
+						<a href="/employee/list/@employeeApplyForm("currentPage").value.get.toInt">
+			                <button class="btn btn-default" type="button">Hủy bỏ</button>
+						</a>
+						
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+}

@@ -42,7 +42,7 @@
 						@Messages.get("login.error.userNotExist")
 					}
 				}</span>
-				<form class="omb_loginForm" action="@controllers.routes.LoginController.postLogin()" autocomplete="off"
+				<form class="omb_loginForm" action="/postLogin" autocomplete="off"
 					method="POST">
 					<input type="text" class="form-control" name="email" id="email"
 						placeholder="Địa chỉ email" value="@loginForm("email").value">

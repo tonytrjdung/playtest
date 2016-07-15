@@ -1,0 +1,14 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+
+GET		/employee/apply/:id/:currentPage										controllers.EmployeeController.emloyeeApplyGet(id: Int, currentPage: Int)
+POST	/employee/apply														    controllers.EmployeeController.emloyeeApplyPost()
+GET		/employee/deleteApply/:id/:currentPage									controllers.EmployeeController.deleteApply(id: Int, currentPage: Int)
+
+GET		/employee/list/:currentPage											    controllers.EmployeeController.approveEmployeeList(currentPage: Int)
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file             												controllers.Assets.at(path="/public", file)

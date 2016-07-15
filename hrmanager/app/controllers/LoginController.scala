@@ -1,25 +1,21 @@
 package controllers
 
-import play.api._
-import play.api.mvc._
-import play.api.i18n.I18nSupport
-import play.api.libs.ws.WSClient
-import play.api.cache.CacheApi
-import play.api.i18n.MessagesApi
 import javax.inject.Inject
-import play.api.mvc.Controller
-import scala.concurrent.ExecutionContext
-import constants.GoogleConstant
-import scala.concurrent.Await
-import utils.StringUtils
-import service._
+
+import constants.{CommonConstant, GoogleConstant}
 import entity.User
-import forms.UserGoogleForm
-import forms.UserLoginAccountForm
-import play.api.data.Form
-import play.api.data.Forms.{ mapping, longNumber, nonEmptyText, number, email }
-import constants.CommonConstant
+import forms.{UserGoogleForm, UserLoginAccountForm}
 import play.api.Logger
+import play.api.cache.CacheApi
+import play.api.data.Form
+import play.api.data.Forms.{email, mapping, nonEmptyText}
+import play.api.i18n.{I18nSupport, MessagesApi}
+import play.api.libs.ws.WSClient
+import play.api.mvc.{Controller, _}
+import service._
+import utils.StringUtils
+
+import scala.concurrent.{Await, ExecutionContext}
 
 class LoginController @Inject() (val messagesApi: MessagesApi,
     val ws: WSClient,

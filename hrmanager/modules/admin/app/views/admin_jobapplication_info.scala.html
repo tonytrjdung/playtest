@@ -1,0 +1,102 @@
+@import entity._
+@import play.i18n._
+@import java.util.List
+@import utils._
+
+@(employeeApplyForm : EmployeeApply,emailLogin: String, roleIdLogin: String) 
+@main("Hrmanager") { 
+@admin_header("List User",emailLogin,roleIdLogin)
+<div id="wrapper">
+	@admin_header("Employee Page",emailLogin, roleIdLogin)
+	<div id="page-wrapper">
+		<div class="container-fluid">
+			<!-- Page Heading -->
+			<div class="row">
+				<div class="col-lg-12">
+					<h1 class="page-header">Nộp Đơn</h1>
+					<ol class="breadcrumb">
+						<li><i class="fa fa-dashboard"></i> <a href="@StringUtils.redirectPageRole(roleIdLogin)">HR Manager</a></li>
+						<li class="active"><i class="fa fa-table"></i> Nộp Đơn</li>
+					</ol>
+				</div>
+			</div>
+			<!-- /.row -->
+
+			<div class="row">
+				<form method="GET" action="/admin/manager/application/delete/@employeeApplyForm.id">
+					<div class="col-lg-6">
+						<div class="form-group">
+							<label>Người nộp đơn</label>
+							<input class="form-control" value="@employeeApplyForm.emailEmployee.fullName" readonly="readonly" name="emailEmployee" id="emailEmployee">
+						</div>
+						
+						<div class="form-group">
+							<label>Người duyệt</label>
+							<input class="form-control" value="@employeeApplyForm.emailManager.fullName" readonly="readonly" name="emailManager" id="emailManager">
+						</div>
+						
+						<div class="form-group">
+							<div class="form-group">
+								<label>Từ ngày</label>
+								<div class='input-group date'>
+									<input type="Text" name="fromDate"  value="@employeeApplyForm.fromDate" id="fromDate"
+				 								maxlength="25" size="25"  readonly/>  
+								</div>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label>Email người nghỉ</label>
+							<input class="form-control" value="@employeeApplyForm.emailEmployee.email" readonly="readonly" name="emailEmployee" id="emailEmployee">
+						</div>
+						
+						<div class="form-group">
+							<label>Email người duyệt</label>
+							<input class="form-control" value="@employeeApplyForm.emailManager.email" readonly="readonly" name="emailManageremail" id="emailManageremail">
+						</div>
+					</div>
+					
+					<div class="col-lg-6">
+						<div class="form-group">
+							<label>Đơn vị</label>
+							<input class="form-control" value="@employeeApplyForm.deparment.deparmentName" readonly="readonly" name="deparmentName" id="deparmentName">
+						</div>
+						
+						<div class="form-group">
+							<label>Lý do nghỉ</label>
+							<input class="form-control" value="@employeeApplyForm.reason.reasonName" readonly="readonly" name="reasonName" id="reasonName">
+						</div>
+						
+						<div class="form-group">
+							<div class="form-group">
+								<label>Đến ngày</label>
+								<div class='input-group date'>
+									<input type="Text" name="toDate"  value="@employeeApplyForm.toDate" id="toDate"
+				 								maxlength="25" size="25"  readonly/>  
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label>Status</label>
+							<input class="form-control" value="@employeeApplyForm.status.statusName" readonly="readonly" name="statusName" id="statusName">
+						</div>
+						
+						<div class="form-group">
+							<label>Ngày đệ trình</label>
+							<input class="form-control" value="@employeeApplyForm.submitDate" readonly="readonly" name="submitDate" id="submitDate">
+						</div>
+						
+					</div>
+					
+					<div class="col-lg-12">
+						<button type="submit" class="btn btn-primary">Xóa</button>
+						<a href="/admin/manager/application">
+			                <button class="btn btn-danger" type="button">Hủy bỏ</button>
+						</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+}
