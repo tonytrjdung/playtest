@@ -12,6 +12,9 @@ GET     /loginByGoogle              											controllers.LoginController.login
 GET     /login      															controllers.LoginController.login(state: String, code: String)
 GET		/register																controllers.RegisterController.register()
 POST	/register																controllers.RegisterController.registerUserPost()
+
+GET		/error_first															controllers.ErrorController.error_first()
+GET		/error_after															controllers.ErrorController.error_after()
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file             												controllers.Assets.at(path="/public", file)
 
