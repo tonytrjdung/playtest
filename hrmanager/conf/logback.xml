@@ -27,6 +27,69 @@
   <logger name="play" level="INFO" />
   <logger name="application" level="DEBUG" />
 
+
+  <appender name="FILEADMIN" class="ch.qos.logback.core.FileAppender">
+    <file>${application.home:-.}/logs/admin.log</file>
+    <encoder>
+      <pattern>%date [%level] from %logger in %thread - %message%n%xException</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="STDOUTADMIN" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%coloredLevel %logger{15} - %message%n%xException{10}</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="ASYNCFILEADMIN" class="ch.qos.logback.classic.AsyncAppender">
+    <appender-ref ref="FILEADMIN" />
+  </appender>
+
+  <appender name="ASYNCSTDOUTADMIN" class="ch.qos.logback.classic.AsyncAppender">
+    <appender-ref ref="STDOUTADMIN" />
+  </appender>
+
+  <logger name="controllers.AdminController" level="INFO">
+    <appender-ref ref="ASYNCFILEADMIN" />
+    <appender-ref ref="ASYNCSTDOUTADMIN" />
+  </logger>
+  <logger name="controllers.AdminController" level="DEBUG">
+    <appender-ref ref="ASYNCFILEADMIN" />
+    <appender-ref ref="ASYNCSTDOUTADMIN" />
+  </logger>
+
+
+  <appender name="FILEUSER" class="ch.qos.logback.core.FileAppender">
+    <file>${application.home:-.}/logs/user.log</file>
+    <encoder>
+      <pattern>%date [%level] from %logger in %thread - %message%n%xException</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="STDOUTUSER" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%coloredLevel %logger{15} - %message%n%xException{10}</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="ASYNCFILEUSER" class="ch.qos.logback.classic.AsyncAppender">
+    <appender-ref ref="FILEUSER" />
+  </appender>
+
+  <appender name="ASYNCSTDOUTUSER" class="ch.qos.logback.classic.AsyncAppender">
+    <appender-ref ref="STDOUTUSER" />
+  </appender>
+
+  <logger name="controllers.EmployeeController" level="INFO">
+    <appender-ref ref="ASYNCFILEUSER" />
+    <appender-ref ref="ASYNCSTDOUTUSER" />
+
+  </logger>
+  <logger name="controllers.EmployeeController" level="DEBUG">
+    <appender-ref ref="ASYNCFILEUSER" />
+    <appender-ref ref="ASYNCSTDOUTUSER" />
+  </logger>
+
   <!-- Off these ones as they are annoying, and anyway we manage configuration ourselves -->
   <logger name="com.avaje.ebean.config.PropertyMapLoader" level="OFF" />
   <logger name="com.avaje.ebeaninternal.server.core.XmlConfigLoader" level="OFF" />

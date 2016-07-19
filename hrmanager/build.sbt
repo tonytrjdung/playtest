@@ -1,12 +1,13 @@
 name := """hrmanager"""
 
 version := "1.0-SNAPSHOT"
-unmanagedJars in Compile += file("I:/Project Spring/playtest/hrmanager/modules/uitl/libexec/org/uitl/uitl_2.11/1.0-SNAPSHOT/uitl_2.11-1.0-SNAPSHOT.jar")
-unmanagedJars in Compile += file("I:/Project Spring/playtest/hrmanager/modules/db/target/scala-2.11/db_2.11-1.0-SNAPSHOT.jar")
+unmanagedJars in Compile += file("D:/DOCUMENT/playtest/hrmanager/packages/pkg_db/target/scala-2.11/pkg_db_2.11-1.0-SNAPSHOT.jar")
+unmanagedJars in Compile += file("D:/DOCUMENT/playtest/hrmanager/packages/helper/target/scala-2.11/helper_2.11-1.0-SNAPSHOT.jar")
+
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
-  .aggregate(admin,user,db,uitl)
-  .dependsOn(admin,user,db,uitl)
+  .aggregate(pkg_admin,pkg_user,pkg_db,helper)
+  .dependsOn(pkg_admin,pkg_user,pkg_db,helper)
 
 scalaVersion := "2.11.7"
 
@@ -26,32 +27,23 @@ libraryDependencies ++= Seq(
 
 
 // db Portal
-lazy val uitl = project.in(file("modules/uitl"))
+lazy val helper = project.in(file("packages/helper"))
 
 // db Portal
-lazy val db = project.in(file("modules/db"))
+lazy val pkg_db = project.in(file("packages/pkg_db"))
   .enablePlugins(PlayScala)
-  .dependsOn(uitl)
-  .aggregate(uitl)
+  .dependsOn(helper)
+  .aggregate(helper)
 
 // Admin Portal
-lazy val admin = project.in(file("modules/admin"))
+lazy val pkg_admin = project.in(file("packages/pkg_admin"))
   .enablePlugins(PlayScala)
-  .dependsOn(db,uitl)
-  .aggregate(db,uitl)
+  .dependsOn(pkg_db,helper)
+  .aggregate(pkg_db,helper)
 // User Portal
-lazy val user = project.in(file("modules/user"))
+lazy val pkg_user = project.in(file("packages/pkg_user"))
   .enablePlugins(PlayScala)
-  .dependsOn(db,uitl)
-  .aggregate(db,uitl)
-
-
-// Compile the project before generating Eclipse files, so that generated .scala or .class files for views and routes are present
-EclipseKeys.preTasks := Seq(compile in Compile)
-//PlayKeys.devSettings += ("play.http.router", "admin.Routes")
-//PlayKeys.devSettings += ("play.http.router", "user.Routes")
-//PlayKeys.devSettings += ("play.http.router", "db.Routes")
-//PlayKeys.devSettings += ("play.http.router", "uitl.Routes")
-//PlayKeys.externalizeResources := false
+  .dependsOn(pkg_db,helper)
+  .aggregate(pkg_db,helper)
 
 routesGenerator := InjectedRoutesGenerator
