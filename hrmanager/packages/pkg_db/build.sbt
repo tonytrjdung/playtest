@@ -1,9 +1,7 @@
 name := """pkg_db"""
-
 version := "1.0-SNAPSHOT"
 lazy val pkg_db = (project in file(".")).enablePlugins(PlayScala)
-
-unmanagedJars in Compile += file("D:/DOCUMENT/playtest/hrmanager/packages/helper/target/scala-2.11/helper_2.11-1.0-SNAPSHOT.jar")
+unmanagedJars in Compile += file("I:/Project Spring/playtest/hrmanager/packages/helper/target/scala-2.11/helper_2.11-1.0-SNAPSHOT.jar")
 scalaVersion := "2.11.7"
 libraryDependencies ++= Seq(
   javaJpa,

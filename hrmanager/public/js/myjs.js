@@ -1,80 +1,76 @@
-var id = 0;
-var currentPage = 0;
-$(document).ready(function() {
-	$("#idTest").click(function() {
-		alert("test js");
-	});
-	
-	$(".btn-success").click(function() {
-		var url = "/employee/deleteApply/" + id + "/" + currentPage;
-		$.get(url,function(data, status) {
-		
-		}
-	});
-});
-function confirmDelete(idValue, currentPageValue) {
-	id = idValue;
-	currentPage = currentPageValue;
-	var settings = {
-			callbackSuccess : function() {
-				
-			},
-			callbackCancel : function() {
-				
-			},
-			closeButton : false
-	};
-	createBootboxDialog('Confirm Delete', 'Are you want delete this?', settings);
-}
+$(document).ready(function(){
+    $("#ajaxsample").click(function(){
+        $.ajax({
+            type :  "GET",
+            url  :  "/resultajax",
+            contentType: "application/json;charset=utf-8",
+            success: function(data){
+                $("#div1").html(data.name2 + data.age2);
+            }
+        });
+    });
 
-function createBootboxDialog(title, msg, settings) {
 
-    /** sample setting
-    var settings = {
-            lblSuccess : "Aceptar",
-            lblCancel : "Cancelar",
-            classBtnSuccess : "btn-success",
-            classBtnCancel : "btn-cancel",
-            callbackSuccess : function() {
-                alert("Sin callback ok");
-            },
-            callbackCancel : function() {
-                alert("Sin callback cancel");
-            },
-            closeButton : false,
-            hideClass : "btn-success"
-        };
-    */
+    $("#ajaxsample1").click(function(){
+        $.ajax({
+            type :  "GET",
+            url  :  "/resultlistobject",
+            contentType: "application/json;charset=utf-8",
+            success: function(data){
+                $("#div2").html(data.email + data.name + data.fullName);
+            }
+        });
+    });
 
-    var dialog = null;
-    try {
-        dialog = bootbox.dialog({
-                title : title,
-                message : msg,
-                show : true,
-                buttons : {
-                    success : {
-                        label :  "OK",
-                        className : "btn-success",
-                        callback : function() {
-                                }
-                    },
-                    cancel : {
-                        label : "キャンセル",
-                        className : "btn-primary",
-                        callback : function() {
-                                }
 
-                    }
+    $("#ajaxsample3").click(function(){
+        $.ajax({
+            type :  "GET",
+            url  :  "/resultlist",
+            contentType: "application/json;charset=utf-8",
+            success: function(data){
+                var test = "";
+                for(var i = 0;i < data.length;i++) {
+                    test += "<tr>";
+                    test += "<td>" +  data[i].email + "</td>";
+                    test += "<td>" +  data[i].name + "</td>";
+                    test += "<td>" +  data[i].fullName + "</td>";
+                    test +="</tr>";
                 }
-            });
+                $("#div3").html(test);
+            }
+        });
+    });
 
-        if (checkNotEmpty(settings.hideClass)) {
-            $("." + settings.hideClass).hide();
-        }
-    } catch (e) {
-    }
+    $("#ajaxsample4").click(function(){
+        $.ajax({
+            type :  "GET",
+            url  :  "/resultParam",
+            data: {name: 'idTest'},
+            dataType: 'json',
+            contentType: "application/json;charset=utf-8",
+            success: function(data){
+                $("#div4").html(data);
+            }
+        });
+    });
 
-    return dialog;
-};
 
+    $("#ajaxsample5").click(function(){
+        var data0 = {email: "1", name : "531", fullName:"dung"};
+
+        var json = JSON.stringify(data0 );
+
+        $.ajax({
+            type :  "GET",
+            url  :  "/resultObject",
+            data:json,
+            dataType: 'json',
+            contentType: "application/json;charset=utf-8",
+            success: function(data){
+                $("#div5").html(data);
+            }
+        });
+    });
+
+});

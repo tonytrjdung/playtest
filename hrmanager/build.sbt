@@ -1,8 +1,8 @@
 name := """hrmanager"""
 
 version := "1.0-SNAPSHOT"
-unmanagedJars in Compile += file("D:/DOCUMENT/playtest/hrmanager/packages/pkg_db/target/scala-2.11/pkg_db_2.11-1.0-SNAPSHOT.jar")
-unmanagedJars in Compile += file("D:/DOCUMENT/playtest/hrmanager/packages/helper/target/scala-2.11/helper_2.11-1.0-SNAPSHOT.jar")
+unmanagedJars in Compile += file("I:/Project Spring/playtest/hrmanager/packages/pkg_db/target/scala-2.11/pkg_db_2.11-1.0-SNAPSHOT.jar")
+unmanagedJars in Compile += file("I:/Project Spring/playtest/hrmanager/packages/helper/target/scala-2.11/helper_2.11-1.0-SNAPSHOT.jar")
 
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
