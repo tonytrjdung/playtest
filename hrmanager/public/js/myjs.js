@@ -57,18 +57,18 @@ $(document).ready(function(){
 
 
     $("#ajaxsample5").click(function(){
-        var data0 = {email: "1", name : "531", fullName:"dung"};
+        var data0 = {email: "ptdung0312@gmail.com", name : "dungpt", fullName:"Phan Thanh Dũng"};
 
-        var json = JSON.stringify(data0 );
+        var json1 = JSON.stringify(data0);
 
         $.ajax({
-            type :  "GET",
+            type :  "POST",
             url  :  "/resultObject",
-            data:json,
+            data:json1,
             dataType: 'json',
             contentType: "application/json;charset=utf-8",
             success: function(data){
-                $("#div5").html(data);
+                $("#div5").html(data.email + "  " + data.name + " " + data.fullName);
             }
         });
     });

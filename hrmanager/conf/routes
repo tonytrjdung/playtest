@@ -25,7 +25,7 @@ GET	/resultlist															controllers.SampleAjax.resultlist()
 
 GET	/resultParam															controllers.SampleAjax.resultParam()
 
-GET	/resultObject															controllers.SampleAjax.resultObject()
+POST	/resultObject															controllers.SampleAjax.resultObject()
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file             												controllers.Assets.at(path="/public", file)
 

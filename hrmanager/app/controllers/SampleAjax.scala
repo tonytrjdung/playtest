@@ -50,12 +50,13 @@ class SampleAjax @Inject()(val messagesApi: MessagesApi,
 }
 
   def resultParam = Action { implicit request =>
-    var a = request.getQueryString("name")
+    val a = request.getQueryString("name")
     Ok(Json.toJson(a))
   }
 
   def resultObject = Action { implicit request =>
-    Ok(Json.toJson("a"))
+    val json = request.body.asJson.get
+    val stock = json.as[UserDto]
+    Ok(Json.toJson(stock))
   }
-
 }
